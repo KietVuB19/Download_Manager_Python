@@ -23,8 +23,14 @@ class MainApp(QMainWindow, ui):
     self.handleBtn()
 
   def initialize(self):
-    '''contain all ui changes in loading'''
-    pass
+    self.tabWidget.tabBar().setVisible(False)
+    self.darkorangeStyle()
+    # self.Move_Box_1()
+    # self.Move_Box_2()
+    # self.Move_Box_3()
+    # self.Move_Box_4()
+    
+    
 
   def handleBtn(self):
     self.pushButton.clicked.connect(self.download)
@@ -34,6 +40,14 @@ class MainApp(QMainWindow, ui):
     self.pushButton_5.clicked.connect(self.getVideoData)
     self.pushButton_6.clicked.connect(self.pickSavePlaylistLocation)
     self.pushButton_7.clicked.connect(self.downloadPlaylist)
+    self.pushButton_8.clicked.connect(self.openHome)
+    self.pushButton_9.clicked.connect(self.openDownload)
+    self.pushButton_10.clicked.connect(self.openYoutube)
+    self.pushButton_11.clicked.connect(self.openSetting)
+    self.pushButton_12.clicked.connect(self.darkorangeStyle)
+    self.pushButton_13.clicked.connect(self.qdarkStyle)
+    # self.pushButton_14.clicked.connect(self.darkgrayStyle)
+    self.pushButton_15.clicked.connect(self.darkbluStyle)
     
   def handleProgress(self, blocknum, blocksize, totalsize):
     '''calculate the progress downloading'''
@@ -95,7 +109,9 @@ class MainApp(QMainWindow, ui):
 
     if videoUrl == '':
       QMessageBox.warning(self, 'Data Error', 'URL không hợp lệ')
-    else: 
+      return
+
+    try:
       print(videoUrl)
       video = pafy.new(videoUrl)
       print(video.title)
@@ -106,6 +122,9 @@ class MainApp(QMainWindow, ui):
         size = humanize.naturalsize(stream.get_filesize()) 
         data = '{} {} {} {}'.format(stream.mediatype, stream.extension, stream.quality, size)
         self.comboBox.addItem(data)
+    except Exception as e:
+      print(e)
+      return
 
   def downloadVideo(self):
     videoUrl = self.lineEdit_3.text()
@@ -210,6 +229,74 @@ class MainApp(QMainWindow, ui):
   def pickSavePlaylistLocation(self): 
     saveLocation = QFileDialog.getExistingDirectory(self, 'Select Download Directory')
     self.lineEdit_6.setText(saveLocation)
+
+  # Change UI
+  def openHome(self):
+    self.tabWidget.setCurrentIndex(0)
+
+  def openDownload(self):
+    self.tabWidget.setCurrentIndex(1)
+
+  def openYoutube(self):
+    self.tabWidget.setCurrentIndex(2)
+
+  def openSetting(self):
+    self.tabWidget.setCurrentIndex(3)
+
+  def darkorangeStyle(self):
+    style = open(r'assets/themes/darkorange.css')
+    style = style.read()
+    self.setStyleSheet(style)
+
+  def qdarkStyle(self):
+    style = open(r'assets/themes/qdark.css')
+    style = style.read()
+    self.setStyleSheet(style)
+
+  # def darkgrayStyle(self):
+  #   style = open(r'assets/themes/qdarkgray.css')
+  #   style = style.read()
+  #   self.setStyleSheet(style)
+
+  def darkbluStyle(self):
+    style = open(r'assets/themes/darkblu.css')
+    style = style.read()
+    self.setStyleSheet(style)
+
+  def Move_Box_1(self):
+    box_animation1 = QPropertyAnimation(self.groupBox , b"geometry")
+    box_animation1.setDuration(2500)
+    box_animation1.setStartValue(QRect(0,0,0,0))
+    box_animation1.setEndValue(QRect(60,40,281,141))
+    box_animation1.start()
+    self.box_animation1 = box_animation1
+
+
+  def Move_Box_2(self):
+    box_animation2 = QPropertyAnimation(self.groupBox_2 , b"geometry")
+    box_animation2.setDuration(2500)
+    box_animation2.setStartValue(QRect(0,0,0,0))
+    box_animation2.setEndValue(QRect(380,40,281,141))
+    box_animation2.start()
+    self.box_animation2 = box_animation2
+
+
+  def Move_Box_3(self):
+    box_animation3 = QPropertyAnimation(self.groupBox_3 , b"geometry")
+    box_animation3.setDuration(2500)
+    box_animation3.setStartValue(QRect(0,0,0,0))
+    box_animation3.setEndValue(QRect(60,210,281,141))
+    box_animation3.start()
+    self.box_animation3 = box_animation3
+
+
+  def Move_Box_4(self):
+    box_animation4 = QPropertyAnimation(self.groupBox_4 , b"geometry")
+    box_animation4.setDuration(2500)
+    box_animation4.setStartValue(QRect(0,0,0,0))
+    box_animation4.setEndValue(QRect(380,210,281,141))
+    box_animation4.start()
+    self.box_animation4 = box_animation4
 
 if __name__ == '__main__':
   app = QApplication(sys.argv)
