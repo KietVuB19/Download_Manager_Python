@@ -30,8 +30,6 @@ class MainApp(QMainWindow, ui):
     # self.Move_Box_3()
     # self.Move_Box_4()
     
-    
-
   def handleBtn(self):
     self.pushButton.clicked.connect(self.download)
     self.pushButton_2.clicked.connect(self.pickSaveFileLocation)
