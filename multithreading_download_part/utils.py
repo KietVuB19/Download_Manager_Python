@@ -246,7 +246,7 @@ if __name__ == '__main__':
     url2 = 'https://getsamplefiles.com/download/rar/sample.rar'
     url3 = 'https://filesamples.com/samples/document/docx/sample4.docx'
     d = Downloader(url3, 2)
-    d.start_download()
+    # d.start_download()
     # r = requests.get(url3)
     # print(r.headers)
     # print(r.content)

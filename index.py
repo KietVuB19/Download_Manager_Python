@@ -18,9 +18,14 @@ class MainApp(QMainWindow, ui):
   def __init__(self, parent=None):
     super(MainApp, self).__init__(parent)
     QMainWindow.__init__(self)
+    self.log = list()
     self.setupUi(self)
     self.initialize()
     self.handleBtn()
+
+  def append_log(self, msg):
+    self.log.append(msg)
+    self.label_17.setText("<br>".join(self.log))
 
   def initialize(self):
     self.tabWidget.tabBar().setVisible(False)
@@ -29,6 +34,8 @@ class MainApp(QMainWindow, ui):
     # self.Move_Box_2()
     # self.Move_Box_3()
     # self.Move_Box_4()
+    self.append_log('Log xử lý:')
+    self.append_log('Test')
     
   def handleBtn(self):
     self.pushButton.clicked.connect(self.download)
